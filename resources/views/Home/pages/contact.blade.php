@@ -18,7 +18,7 @@
                     <div class="contact-info-item padd-15">
                         <div class="icon"><i class="fa fa-phone"></i></div>
                         <h4>Call Us On</h4>
-                        <a href="Tel:9258160499">+91 92581 60499</a>
+                        <a href="Tel:6399787403">+91 63997 87403</a>
                     </div>
                     <!-- contact info item end  -->
                     <!-- contact info item start  -->
@@ -32,14 +32,14 @@
                     <div class="contact-info-item padd-15">
                         <div class="icon"><i class="fa fa-envelope"></i></div>
                         <h4>Email</h4>
-                        <a href="Mailto:rathoredarshika740@gmail.com">rathoredarshika740@gmail.com</a>
+                        <a href="Mailto:ankitrathore3110@gmail.com">ankitrathore3110@gmail.com</a>
                     </div>
                     <!-- contact info item end  -->
                     <!-- contact info item start  -->
                     <div class="contact-info-item padd-15">
                         <div class="icon"><i class="fa fa-globe-europe"></i></div>
                         <h4>Website</h4>
-                        <a href="">www.-----.com</a>
+                        <a href="https://akkirathore.com/">https://akkirathore.com/</a>
                     </div>
                     <!-- contact info item end  -->
                 </div>

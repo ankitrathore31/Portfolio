@@ -14,7 +14,7 @@
                     <div class="about-content padd-15">
                         <div class="row">
                             <div class="about-text">
-                                <h3>I'm Darshika Rathore <span>Web Developer</span></h3>
+                                <h3>I'm Ankit Rathore <span>Web Developer</span></h3>
                                 <p>A passionate web developer dedicated to building fast, responsive, and
                                     user-friendly
                                     websites. With a strong background in frontend and backend development, I
@@ -29,19 +29,19 @@
                             <div class="personal-info padd-15">
                                 <div class="row">
                                     <div class="info-item padd-15">
-                                        <p>Birthday : <span>14 JUNE 2003</span></p>
+                                        <p>Birthday : <span>31 October 2005</span></p>
                                     </div>
                                     <div class="info-item padd-15">
-                                        <p>Profession : <span>Graphic Design</span></p>
+                                        <p>Profession : <span>Web development</span></p>
                                     </div>
                                     <div class="info-item padd-15">
-                                        <p>Website : <span>Portfolio.com</span></p>
+                                        <p>Website : <span><a href="https://akkirathore.com/">https://akkirathore.com/</a></span></p>
                                     </div>
                                     <div class="info-item padd-15">
-                                        <p>Email : <span>rathoredarshika740@gmail.com</span></p>
+                                        <p>Email : <span>ankitrathore3110@gmail.com</span></p>
                                     </div>
                                     <div class="info-item padd-15">
-                                        <p>Phone : <span>+91 92581 60499</span></p>
+                                        <p>Phone : <span>+91 63997 87403</span></p>
                                     </div>
                                     <div class="info-item padd-15">
                                         <p>Degere : <span>BCA</span></p>
@@ -54,11 +54,11 @@
                                     </div>
                                     <div class="info-item padd-15">
                                         <p>Freelance:
-                                            <a href="https://www.instagram.com/darshika__rathore_810?igsh=eXYycjcxMHJ0enpo"
+                                            <a href="https://www.instagram.com/_.ankit.rathore/"
                                                 target="_blank">
                                                 <i class="fab fa-instagram"></i> Instagram
                                             </a> |
-                                            <a href="https://www.linkedin.com/in/darshika-rathore-a5b86a292?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                                            <a href="https://www.linkedin.com"
                                                 target="_blank">
                                                 <i class="fab fa-linkedin"></i> LinkedIn
                                             </a>
@@ -67,15 +67,22 @@
                                 </div>
                                 <div class="row">
                                     <div class="buttons">
-                                        <a href="../images/cv.pdf" download="../images/cv.pdf" target="_blank"
+                                        <a href="#" download="" target="_blank"
                                             class="btn hire-me">Download CV</a>
-                                        <a href="#contact" class="btn hire me">Hire Me</a>
+                                        <a href="{{ route('contact')}}" class="btn hire me">Hire Me</a>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="skills padd-15">
                                 <div class="row">
+                                     <div class="skill-item padd-15">
+                                        <h5>Html</h5>
+                                        <div class="progress">
+                                            <div class="progress-in" style="width: 92%;"></div>
+                                            <div class="skill-percent">92%</div>
+                                        </div>
+                                    </div>
                                     <div class="skill-item padd-15">
                                         <h5>CSS & Bootstrap</h5>
                                         <div class="progress">
@@ -84,7 +91,7 @@
                                         </div>
                                     </div>
                                     <div class="skill-item padd-15">
-                                        <h5>JS</h5>
+                                        <h5>JS & J-Query</h5>
                                         <div class="progress">
                                             <div class="progress-in" style="width: 76%;"></div>
                                             <div class="skill-percent">76%</div>
@@ -93,22 +100,22 @@
                                     <div class="skill-item padd-15">
                                         <h5>PHP</h5>
                                         <div class="progress">
+                                            <div class="progress-in" style="width: 78%;"></div>
+                                            <div class="skill-percent">78%</div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-item padd-15">
+                                        <h5>Laravel Framework</h5>
+                                        <div class="progress">
                                             <div class="progress-in" style="width: 88%;"></div>
                                             <div class="skill-percent">88%</div>
                                         </div>
                                     </div>
                                     <div class="skill-item padd-15">
-                                        <h5>Node JS</h5>
+                                        <h5>My Sql</h5>
                                         <div class="progress">
                                             <div class="progress-in" style="width: 56%;"></div>
                                             <div class="skill-percent">56%</div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-item padd-15">
-                                        <h5>React</h5>
-                                        <div class="progress">
-                                            <div class="progress-in" style="width: 55%;"></div>
-                                            <div class="skill-percent">55%</div>
                                         </div>
                                     </div>
                                 </div>

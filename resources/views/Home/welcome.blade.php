@@ -14,7 +14,7 @@
                                 Frontend & Backend, Graphic Design and many more....
                             </p>
                             <a href="{{ route('contact')}}" class="btn hire-me">Hire Me</a>
-                            <a href="../images/cv.pdf" download="images/cv.pdf" target="_blank"
+                            <a href="#" download="#" target="_blank"
                                 class="btn hire-me">Download CV</a>
                         </div>
                         <div class="home-img padd-15">

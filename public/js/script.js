@@ -1,30 +1,23 @@
-/* =================== Typing Animation ======================== */
-var typed = new Typed(".typing", {
-    strings: ["", "Web Designer", "Web Developer", "Graphic Designer", "Digital Marketer"],
-    typeSpeed: 60,       // slower typing (was 40)
-    backSpeed: 40,       // slower backspacing (was 80)
-    loop: true
-});
+document.addEventListener("DOMContentLoaded", function () {
+    const typingElement = document.querySelector(".typing");
 
+    if (typingElement) {
+        var typed = new Typed(".typing", {
+            strings: ["", "Web Designer", "Web Developer", "Graphic Designer", "Digital Marketer"],
+            typeSpeed: 60,
+            backSpeed: 30,
+            loop: true
+        });
+    }
 
-/* =================== Aside ======================== */
-
-document.addEventListener("DOMContentLoaded", () => {
+    // Other JS code like toggle:
     const navTogglerBtn = document.querySelector(".nav-toggler");
     const aside = document.querySelector(".aside");
-    const allSection = document.querySelectorAll(".section");
-    const totalSection = allSection.length;
 
     if (navTogglerBtn && aside) {
         navTogglerBtn.addEventListener("click", () => {
             aside.classList.toggle("open");
             navTogglerBtn.classList.toggle("open");
-            for (let i = 0; i < totalSection; i++) {
-                allSection[i].classList.toggle("open");
-            }
         });
-    } else {
-        console.log("navTogglerBtn or aside not found.");
     }
 });
-
