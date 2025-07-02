@@ -18,10 +18,12 @@
     {{-- Main Content --}}
     @yield('content')
 
-    <!-- Load Typed.js from CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    {{-- JavaScript --}}
+    @if (Request::is('/'))
+        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    @endif
     <script src="{{ asset('js/script.js') }}"></script>
+    {{-- JavaScript --}}
+    <script src="{{ asset('script/script.js') }}"></script>
 
 </body>
 

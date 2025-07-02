@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Other JS code like toggle:
     const navTogglerBtn = document.querySelector(".nav-toggler");
     const aside = document.querySelector(".aside");
 
