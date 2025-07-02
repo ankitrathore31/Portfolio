@@ -1,0 +1,70 @@
+@media(max-width:1199px){
+    .aside{
+        left: -270px;
+    }
+    .aside.open{
+        left: 0;
+    }
+    
+    .aside .nav-toggler{
+        display: flex;
+        left: 30px;
+    }
+    .aside .nav-toggler.open{
+        left: 300px;
+    }
+    .main-content{
+        padding-left: 0;
+    }
+    /* .section{
+        left: 0;
+    } */
+    .about .about-content .personal-info .info-item p span{
+        display: block;
+        margin-left: 0;
+    }
+}
+@media(max-width:991px){
+    .home .home-info{
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .home .home-img{
+        display: none;
+    }
+    .service .service-item,
+    .project .project-item,
+    .contact .contact-info-item
+    {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+@media(max-width:767px){
+    .contact .contact-form .col-6,
+    .contact .contact-info-item,
+    .project .project-item,
+    .service .service-item,
+    .about .about-content .experience,
+    .about .about-content .education,
+    .about .about-content .skills,
+    .about .about-content .personal-info{
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .btn{
+        margin-top: 10px;
+    }
+}
+/* Responsive for small screens */
+@media (max-width: 768px) {
+    .certificate-item {
+        flex: 1 1 100%; /* One item per row on small screens */
+        max-width: 100%;
+    }
+
+    .aside .logo{
+        display: none;
+    }
+}
+
