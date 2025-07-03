@@ -4,8 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (typingElement) {
         var typed = new Typed(".typing", {
             strings: ["", "Web Designer", "Web Developer", "Graphic Designer", "Digital Marketer"],
-            typeSpeed: 60,
-            backSpeed: 30,
+            typeSpeed: 100,
+            backSpeed: 80,
             loop: true
         });
     }
