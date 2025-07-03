@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,4 +23,9 @@ Route::controller(HomeController::class)->group(function(){
     Route::get('/project', 'project')->name('project');
     Route::get('/certificates', 'certificates')->name('certificates');
     Route::get('/contact', 'contact')->name('contact');
+});
+
+
+Route::controller(AdminController::class)->group(function(){
+    Route::get('/admin', 'admin')->name('admin');
 });
