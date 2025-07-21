@@ -1,5 +1,4 @@
 @extends('Home.layout.master')
-
 @section('content')
     {{-- <div class="container"> --}}
         <div class="main-content">

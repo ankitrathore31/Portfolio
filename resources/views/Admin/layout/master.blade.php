@@ -26,6 +26,7 @@
             background-color: #E6EBEE;
 
         }
+
         .sidebar {
 
             position: fixed;
@@ -204,6 +205,7 @@
     </style>
 
 </head>
+
 <body>
 
     <div class="main-content">
@@ -238,14 +240,18 @@
                             <i class="fas fa-user"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="profile.php"><i class="fas fa-user"></i> Profile</a></li>
-                            <li><a class="dropdown-item" href="change_password.php"><i class="fas fa-key"></i> Change
+                            <li><a class="dropdown-item" href="{{route('profile')}}"><i class="fas fa-user"></i> Profile</a></li>
+                            <li><a class="dropdown-item" href="{{route('change.pass.show')}}"><i class="fas fa-key"></i> Change
                                     Password</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item text-danger" href="logout.php"><i
-                                        class="fas fa-sign-out-alt"></i> Logout</a></li>
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button class="m-2 btn btn-sm btn-danger"><i class="fas fa-sign-out-alt"></i> Logout </button>
+                                </form>
+                            </li>
                         </ul>
                     </div>
                 </div>

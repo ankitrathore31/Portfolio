@@ -1,6 +1,6 @@
  <div class="aside">
      <div class="logo">
-         <a href=""><span>Ankit</span></a>
+        <a href="{{route('login.page')}}"><span>Ankit</span></a>
      </div>
      <div class="nav-toggler">
          <span></span>

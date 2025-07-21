@@ -20,7 +20,7 @@
 
         <ul class="nav flex-column m-3">
             <li class="nav-item">
-                <a class="nav-link active" href="dashboard.php">
+                <a class="nav-link active" href="">
                     <i class="fas fa-tachometer-alt me-2"></i> Dashboard
                 </a>
             </li>
