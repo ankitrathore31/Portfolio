@@ -89,7 +89,7 @@ class AuthController extends Controller
 
         $otp = rand(100000, 999999);
         Session::put('otp', $otp);
-        Session::put('otp_email', $request->otp_email);
+        Session::put('otp_email', $request->email);
 
         Mail::raw("Your Password reset otp is: $otp ", function($message) use ($request){
             $message->to($request->email)
