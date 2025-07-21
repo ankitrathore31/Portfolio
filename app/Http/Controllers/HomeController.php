@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,8 +25,12 @@ class HomeController extends Controller
     }
     public function project()
     {
-
-        return view('Home.pages.project');
+        $project = Project::get();
+        return view('Home.project.project',compact('project'));
+    }
+    public function ShowProject($id){
+        $project = Project::findorFail($id);
+        return view('Home.project.show-project',compact('project'));
     }
     public function certificates()
     {

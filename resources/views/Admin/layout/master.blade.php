@@ -1,7 +1,4 @@
 <html lang="en">
-
-
-
 <head>
 
     <meta charset="UTF-8">
@@ -41,7 +38,7 @@
 
             /* Adjust height as needed */
 
-            background-color: blueviolet;
+            background-color: #002b36;
 
             /* Dark background color */
 
@@ -83,7 +80,7 @@
 
         .sidebar .nav-link:hover {
 
-            background-color: #4D44B5;
+            background-color: #013b48;
 
             /* Darker background on hover */
 
@@ -93,7 +90,7 @@
 
         .sidebar .dropdown-menu {
 
-            background-color: #4D44B5;
+            background-color: #002b36;
 
             /* Dark dropdown background */
 
@@ -214,7 +211,7 @@
         <div class="container-fluid text-white py-2 bg-white">
             <div class="row align-items-center">
                 <div class="col-md-4 text-start">
-                    <h5 class="text-black" style="color: black;">Admin</h5>
+                    <h5 class="text-black" style="color: black;">{{ Auth::user()->name }}</h5>
                 </div>
                 <div class="col-md-8 text-end d-flex justify-content-end align-items-center">
                     <div class="dropdown me-3">
