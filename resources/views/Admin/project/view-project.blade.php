@@ -2,7 +2,7 @@
 @Section('content')
     <div class="main-content">
         <div class="d-flex justify-content-between align-items-center mb-3 m-2">
-            <h5 class="mb-0">Project Report</h5>
+            <h5 class="mb-0">Project View</h5>
 
             <!-- Breadcrumb aligned to right -->
             <nav aria-label="breadcrumb">
