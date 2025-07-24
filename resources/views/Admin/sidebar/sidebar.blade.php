@@ -1,77 +1,59 @@
-  <!-- Open Sidebar Button -->
+<!-- Sidebar -->
+<div class="sidebar bg-white border-end shadow-sm" id="sidebar">
+    <div class="p-3 text-center border-bottom">
+        <img src="https://via.placeholder.com/80" class="rounded-circle mb-2" alt="Profile" />
+        <h6 class="mb-0">{{ Auth::user()->name }}</h6>
+        <small class="text-muted">Invertis University</small>
+    </div>
 
-  <button class="open-sidebar-btn" id="openSidebar">
+    <ul class="nav flex-column p-3">
+        <li class="nav-item">
+            <a class="nav-link text-dark fw-semibold" href="{{ route('admin') }}">
+                <i class="bi bi-speedometer2 me-2"></i> Dashboard
+            </a>
+        </li>
 
-      <i class="fas fa-bars"></i>
+        <!-- Project -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" role="button" data-bs-toggle="dropdown">
+                <i class="bi bi-kanban me-2"></i> Project
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{ route('add.project') }}"><i class="bi bi-plus-circle me-2"></i>Add Project</a></li>
+                <li><a class="dropdown-item" href="{{ route('project.list') }}"><i class="bi bi-list-check me-2"></i>Project List</a></li>
+            </ul>
+        </li>
 
-  </button>
+        <!-- Certificate -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" role="button" data-bs-toggle="dropdown">
+                <i class="bi bi-award me-2"></i> Certificate
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{ route('add.certificate') }}"><i class="bi bi-plus-circle me-2"></i>Add Certificate</a></li>
+                <li><a class="dropdown-item" href="{{ route('list.certificate') }}"><i class="bi bi-collection me-2"></i>Certificate List</a></li>
+            </ul>
+        </li>
 
-  <!-- Sidebar -->
+        <!-- Gallery -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" role="button" data-bs-toggle="dropdown">
+                <i class="bi bi-images me-2"></i> Gallery
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#"><i class="bi bi-upload me-2"></i>Add Photo</a></li>
+                <li><a class="dropdown-item" href="#"><i class="bi bi-card-image me-2"></i>Photo List</a></li>
+            </ul>
+        </li>
 
-  <div class="sidebar" id="sidebar">
-
-      <div class="container d-flex justify-content-center align-items-center">
-          {{-- <div class="card shadow-lg"
-              style="width: 200px; height: 40px; display: flex; align-items: center; justify-content: center;">
-              <div class="card-body p-0 bg-white">
-                  <h4 class="card-title text-black mt-2" style="font-size: 16px;">Hi, Akki</h4>
-              </div>
-          </div> --}}
-      </div>
-
-      <ul class="nav flex-column m-3 mt-5">
-          <li class="nav-item mt-2">
-              <a class="nav-link active" href="{{ route('admin') }}">
-                  <i class="fas fa-tachometer-alt me-2"></i> Dashboard
-              </a>
-          </li>
-          <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                  <i class="fas fa-project-diagram me-2"></i> Project
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a class="dropdown-item" href="{{route('add.project')}}"><i class="fas fa-plus me-2"></i> Add Project</a></li>
-                  <li><a class="dropdown-item" href="{{route('project.list')}}"><i class="fas fa-list me-2"></i> Project List</a></li>
-              </ul>
-          </li>
-
-          <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                  <i class="fas fa-certificate me-2"></i> Certificate
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a class="dropdown-item" href="#"><i class="fas fa-plus me-2"></i> Add Certificate</a></li>
-                  <li><a class="dropdown-item" href="#"><i class="fas fa-list me-2"></i> Certificate List</a></li>
-              </ul>
-          </li>
-
-          <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                  <i class="fas fa-image me-2"></i> Gallery
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a class="dropdown-item" href="#"><i class="fas fa-upload me-2"></i> Add Photo</a></li>
-                  <li><a class="dropdown-item" href="#"><i class="fas fa-images me-2"></i> Photo List</a></li>
-              </ul>
-          </li>
-          <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                  <i class="fas fa-cog me-2"></i> Setting
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a class="dropdown-item" href="{{route('site.setting')}}"><i class="fas fa-calendar-alt me-2"></i>Site Setting</a>
-                  </li>
-              </ul>
-          </li>
-      </ul>
-
-  </div>
-
-  <script>
-      // Sidebar toggle functionality
-      document.getElementById("openSidebar").addEventListener("click", function() {
-
-          document.getElementById("sidebar").classList.toggle("active");
-
-      });
-  </script>
+        <!-- Settings -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark fw-semibold" href="#" role="button" data-bs-toggle="dropdown">
+                <i class="bi bi-gear me-2"></i> Setting
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{ route('site.setting') }}"><i class="bi bi-sliders me-2"></i>Site Setting</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>

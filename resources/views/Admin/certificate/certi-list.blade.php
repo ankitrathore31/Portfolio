@@ -1,26 +1,25 @@
-@extends('Home.layout.master')
+@extends('Admin.layout.master')
 
 @section('content')
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    {{-- <div class="container"> --}}
     <div class="main-content">
-        <section class="certificate section" id="certificate">
-            <div class="container">
-                <div class="row">
-                    <div class="section-title padd-15">
-                        <h2>Certificates</h2>
-                    </div>
+        <div class="wrapper">
+            <div class="container-fluid mt-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="mb-0">Certificate List</h5>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb bg-light px-3 py-2 mb-0 rounded">
+                            <li class="breadcrumb-item"><a href="{{ url('dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Certificate</li>
+                        </ol>
+                    </nav>
                 </div>
-                <div class="row">
-                    <div class="certificate-heading padd-15">
-                        <h2>My Latest Certificates :</h2>
-                        <small><b>Onclick For Full image</b></small>
+                @if (session('success'))
+                    <div id="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
                     </div>
-                </div>
+                @endif
 
-                <div class="row mt-3">
+                <div class="row">
                     @foreach ($cert as $file)
                         @php
                             $extension = strtolower(pathinfo($file->file_path, PATHINFO_EXTENSION));
@@ -45,7 +44,11 @@
 
                                 <div class="card-body text-center">
                                     <span class="m-1">Title: {{ $file->title }}</span><br>
-                                    
+                                    <a href="{{ route('delete.certificate', $file->id) }}"
+                                        onclick="return confirm('Are you sure to delete this Certificate?');"
+                                        class="btn btn-sm btn-danger mt-2">
+                                        Delete
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -67,11 +70,13 @@
                         </div>
                     </div>
                 </div>
+
             </div>
-        </section>
+
+        </div>
     </div>
-    {{-- </div> --}}
-       <script>
+
+    <script>
         function showPreview(fileUrl) {
             const modalContent = document.getElementById('modalPreviewContent');
             const extension = fileUrl.split('.').pop().toLowerCase();

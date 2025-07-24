@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Certificate;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -34,8 +35,8 @@ class HomeController extends Controller
     }
     public function certificates()
     {
-
-        return view('Home.pages.certificates');
+        $cert = Certificate::get();
+        return view('Home.pages.certificates',compact('cert'));
     }
      public function contact(){
 
