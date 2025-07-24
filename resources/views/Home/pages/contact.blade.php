@@ -6,6 +6,11 @@
         <!-- ========================== Contact section start ================== -->
         <section class="contact section" id="contact">
             <div class="container">
+                {{-- @if (session('success'))
+                    <div id="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                    </div>
+                @endif --}}
                 <div class="row">
                     <div class="section-title padd-15">
                         <h2>Contact Me</h2>
@@ -48,30 +53,31 @@
                 <!-- ===== CONTACT FORM === -->
                 <div class="row">
                     <div class="contact-form padd-15">
-                        <form action="mailto:ankit@gmail.com" >
+                        <form action="{{ route('store.form') }}" method="POST">
+                            @csrf
                             <div class="row">
                                 <div class="form-item col-6 padd-15">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Enter name">
+                                        <input type="text" name="name" class="form-control" placeholder="Enter name">
                                     </div>
                                 </div>
                                 <div class="form-item col-6 padd-15">
                                     <div class="form-group">
-                                        <input type="email" class="form-control" placeholder="Enter email">
+                                        <input type="email" name="email" class="form-control" placeholder="Enter email">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-item col-12 padd-15">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Subject">
+                                        <input type="text" name="subject" class="form-control" placeholder="Subject">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-item col-12 padd-15">
                                     <div class="form-group">
-                                        <textarea name="" class="form-control" id="" cols="30" rows="10" placeholder="Message"></textarea>
+                                        <textarea name="msg" class="form-control" id="" cols="30" rows="10" placeholder="Message"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -89,4 +95,8 @@
         </section>
     </div>
     {{-- </div> --}}
+    <script>
+        // JavaScript code to show a popup
+        alert("{{ Session::get('success') }}");
+    </script>
 @endsection

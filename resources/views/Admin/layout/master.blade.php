@@ -23,7 +23,7 @@
             background-color: #fff;
             border-bottom: 1px solid #e0e0e0;
             transition: box-shadow 0.3s ease;
-            z-index: 1030;
+            /* z-index: 1030; */
         }
 
         .navbar.scrolled {
@@ -155,7 +155,7 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg fixed-top px-3">
+    <nav class="navbar navbar-expand-lg">
         <div class="d-flex flex-grow-1 align-items-center">
 
             <!-- Logo and Toggle -->
@@ -218,6 +218,13 @@
                 </ul>
             </li>
 
+            {{-- Email  --}}
+            <li class="nav-item mx-2">
+                <a class="nav-link text-center" href="{{ route('email.list') }}">
+                    <i class="bi bi-envelope fs-5"></i><br><span>Email</span>
+                </a>
+            </li>
+
             <!-- Settings -->
             <li class="nav-item dropdown mx-2">
                 <a class="nav-link dropdown-toggle text-center" href="#" id="settingsDropdown"
@@ -243,9 +250,9 @@
                     </span>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="#">New message from Admin</a></li>
-                    <li><a class="dropdown-item" href="#">Project deadline approaching</a></li>
-                    <li><a class="dropdown-item" href="#">System update at 3 PM</a></li>
+                    @foreach (limit_email_list() as $item)
+                    <li><a class="dropdown-item" href="{{route('view.email',$item->id)}}">{{$item->name}}</a></li>
+                    @endforeach
                 </ul>
             </li>
             <!-- Me -->

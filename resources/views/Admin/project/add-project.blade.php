@@ -8,8 +8,8 @@
                 <!-- Breadcrumb aligned to right -->
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-light px-3 py-2 mb-0 rounded">
-                        <li class="breadcrumb-item"><a href="{{ route('project.list') }}">Activity List</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Add Activity</li>
+                        <li class="breadcrumb-item"><a href="{{ route('project.list') }}">Project List</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Project</li>
                     </ol>
                 </nav>
             </div>

@@ -41,9 +41,9 @@
     <div class="main-content">
         <div class="wrapper">
             <div class="container my-4">
-                <div class="row g-4 mt-5">
+                <div class="row g-4">
                     <!-- User Info Card -->
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="card dashboard-card shadow-sm p-3">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
@@ -59,36 +59,54 @@
                         </div>
                     </div>
 
+                    <div class="col-md-3">
+                        <div class="card dashboard-card shadow-sm p-3">
+                            <div class="card-body">
+                                <h6 class="text-info mb-3"><strong>Website Visitor</strong></h6>
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        <span class="dashboard-label">Total Visitor: </span><span
+                                            class="dashboard-value">&nbsp; {{ total_vistior() }}</span>
+                                    </li>
+                                    <li>
+                                        <span class="dashboard-label">Today Visitor: </span><span
+                                            class="dashboard-value">&nbsp; {{ today_visitor() }}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Total Projects Card -->
-                    <div class="col-md-4">
-                        <div class="card dashboard-card shadow-sm p-3 border-start border-4 border-primary">
+                    <div class="col-md-3">
+                        <div class="card dashboard-card shadow-sm p-3 ">
                             <div class="card-body">
                                 <h6 class="text-primary mb-3"><strong>Projects</strong></h6>
                                 <ul class="list-unstyled mb-0">
                                     <li><span class="dashboard-label">Total Projects:</span> <span
                                             class="dashboard-value">&nbsp; {{ total_project() }}</span></li>
-                                    <li><span class="dashboard-label">This Month:</span> <span
-                                            class="dashboard-value">&nbsp; {{ This_Month_Projects() }}</span></li>
-                                    <li><span class="dashboard-label">This Year:</span> <span
-                                            class="dashboard-value">&nbsp; {{ This_Year_Projecrs() }}</span></li>
+                                    {{-- <li><span class="dashboard-label">This Month:</span> <span
+                                            class="dashboard-value">&nbsp; {{ This_Month_Projects() }}</span></li> --}}
+                                    <li><span class="dashboard-label">This Year:</span> <span class="dashboard-value">&nbsp;
+                                            {{ This_Year_Projecrs() }}</span></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
 
                     <!-- Total Certificates Card -->
-                    <div class="col-md-4">
-                        <div class="card dashboard-card shadow-sm p-3 border-start border-4 border-success">
+                    <div class="col-md-3">
+                        <div class="card dashboard-card shadow-sm p-3">
                             <div class="card-body">
                                 <h6 class="text-success mb-3"><strong>Certificates</strong></h6>
                                 <ul class="list-unstyled mb-0">
                                     <li>
-                                        <span class="dashboard-label">Total: </span><span
-                                            class="dashboard-value">&nbsp; {{ total_certificates() }}</span>
+                                        <span class="dashboard-label">Total: </span><span class="dashboard-value">&nbsp;
+                                            {{ total_certificates() }}</span>
                                     </li>
                                     <li>
-                                        <span class="dashboard-label">This Year: </span><span
-                                            class="dashboard-value">&nbsp; {{ This_Year_Certifictaes() }}</span>
+                                        <span class="dashboard-label">This Year: </span><span class="dashboard-value">&nbsp;
+                                            {{ This_Year_Certifictaes() }}</span>
                                     </li>
                                 </ul>
                             </div>
@@ -144,6 +162,33 @@
                         <div class="col-md-6 mb-4">
                             <canvas id="lineChart" style="background-color: #fff"></canvas>
                         </div>
+                        <div class="col-md-6 mb-4">
+                        <div class="card-body table-responsive printable">
+                            <table class="table table-bordered table-hover align-middle text-center">
+                                <thead class="table-primary">
+                                    <tr>
+                                        <th>Sr. No.</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (limit_email_list() as $item)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->email }}</td>
+                                            <td><a href="{{ route('view.email', $item->id) }}"
+                                                    class="btn btn-sm me-2 btn-success" title="View">
+                                                    <i class="fa-regular fa-eye"></i>
+                                                </a></td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -177,14 +222,15 @@
         });
 
         // Sample data for line chart
+        const EmailData = @json(getMonthEmailCount());
         const lineCtx = document.getElementById('lineChart').getContext('2d');
         new Chart(lineCtx, {
             type: 'line',
             data: {
-                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 datasets: [{
-                    label: 'Contact',
-                    data: [15, 25, 22, 30],
+                    label: 'Emails',
+                    data: EmailData,
                     fill: false,
                     borderColor: '#198754',
                     tension: 0.3

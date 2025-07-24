@@ -1,7 +1,9 @@
 <?php
 
 use App\Models\Certificate;
+use App\Models\Contact;
 use App\Models\Project;
+use App\Models\Visitor;
 use Illuminate\Support\Facades\DB;
 
 if(!function_exists('get_formated_date')){
@@ -71,5 +73,44 @@ if(!function_exists('This_Year_Certifictaes')){
     function This_Year_Certifictaes(){
         $data = Certificate::whereYear('created_at', now()->year)->count();
         return $data;
+    }
+}
+
+if(!function_exists('total_vistior')){
+    function total_vistior(){
+        $data = Visitor::count();
+        return $data;
+    }
+}
+
+if(!function_exists('today_visitor')){
+    function today_visitor(){
+        $data = Visitor::whereDate('visit_date', now()->toDateString())->count();
+        return $data;
+    }
+}
+
+if(!function_exists('limit_email_list')){
+    function limit_email_list(){
+        $limit_project = Contact::orderBy('created_at', 'desc')->limit(5)->get();
+        return $limit_project;
+    }
+}
+
+if(!function_exists('getMonthEmailCount')){
+    function getMonthEmailCount(){
+    $months = collect(range(1, 12))->map(function($month){
+        return str_pad($month, 2, '0', STR_PAD_LEFT);
+    });
+
+    $projectCount = Contact::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+        ->whereYear('created_at', now()->year)
+        ->groupBy(DB::raw('MONTH(created_at)'))
+        ->pluck('count', 'month');
+
+    return $months->map(function($month) use ($projectCount){
+        return $projectCount->get((int)$month, 0);
+    })->toArray();
+
     }
 }

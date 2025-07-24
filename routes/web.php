@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CertiController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
@@ -11,6 +12,7 @@ use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use App\Mail\TestMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,22 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// Route::get('/debug-mail', function () {
+//     return [
+//         'MAIL_MAILER' => config('mail.default'),
+//         'MAIL_HOST' => config('mail.mailers.smtp.host'),
+//         'MAIL_PORT' => config('mail.mailers.smtp.port'),
+//         'MAIL_USERNAME' => config('mail.mailers.smtp.username'),
+//     ];
+// });
+
+
+// Route::get('/send-test-mail', function () {
+//     Mail::to('test@example.com')->send(new TestMail());
+//     return 'Test email sent!';
+// });
+
 
 // Route::get('/clear-config', function () {
 //     Artisan::call('config:clear');
@@ -47,6 +65,13 @@ Route::controller(HomeController::class)->group(function(){
     Route::get('/show-project/{id}', 'ShowProject')->name('show.project');
     Route::get('/certificates', 'certificates')->name('certificates');
     Route::get('/contact', 'contact')->name('contact');
+});
+
+route::controller(ContactController::class)->group(function(){
+    Route::post('/sent-email', 'StoreForm')->name('store.form');
+    Route::get('admin/email-list', 'EmailList')->middleware('auth')->name('email.list');
+    Route::get('admin/view-email/{id}', 'ViewEmail')->middleware('auth')->name('view.email');
+    Route::post('admin/email-reply/{id}/reply', 'MailReply')->middleware('auth')->name('reply.email');
 });
 
 Route::controller(AuthController::class)->group(function(){

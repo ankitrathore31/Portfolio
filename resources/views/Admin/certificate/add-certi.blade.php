@@ -8,8 +8,8 @@
                     <h5 class="mb-0">Add Certificate</h5>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb bg-light px-3 py-2 mb-0 rounded">
-                            <li class="breadcrumb-item"><a href="{{ url('dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Gallery</li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Certificate</li>
                         </ol>
                     </nav>
                 </div>
