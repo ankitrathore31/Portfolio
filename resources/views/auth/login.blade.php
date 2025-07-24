@@ -129,8 +129,12 @@
                         @endif
 
                         <!-- Create Account -->
-                        <div class="create-account mt-1">
-                            <p>Don't have an account? <a href="{{ route('register.show') }}" class="text-primary">Sign Up</a>
+                        <!-- Sign Up Message Link -->
+                        <div class="create-account mt-3">
+                            <p>
+                                Don't have an account?
+                                <a href="javascript:void(0);" class="text-primary" onclick="showDevOnlyPopup()">Sign
+                                    Up</a>
                             </p>
                         </div>
                     </form>
@@ -166,7 +170,11 @@
             });
         }
     </script>
-
+    <script>
+        function showDevOnlyPopup() {
+            alert("🚫 Registration is only available for developers.");
+        }
+    </script>
 
 </body>
 

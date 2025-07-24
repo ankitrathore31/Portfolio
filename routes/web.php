@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CertiController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
@@ -22,10 +23,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/clear-mail-config', function () {
+// Route::get('/clear-config', function () {
 //     Artisan::call('config:clear');
 //     Artisan::call('config:cache');
-//     return 'Mail config cleared!';
+//     return 'config cleared!';
 // });
 
 // Route::get('/test-mail', function () {
@@ -85,4 +86,12 @@ Route::controller(ProjectController::class)->group(function(){
 
 Route::controller(SettingController::class)->group(function(){
     Route::get('/admin/site-setting', 'SiteSetting')->middleware('auth')->name('site.setting');
+    Route::post('/admin/store-setting', 'saveSetting')->middleware('auth')->name('store.setting');
+});
+
+Route::controller(CertiController::class)->group(function(){
+    Route::get('/admin/add-certificate', 'AddCerti')->middleware('auth')->name('add.certificate');
+    Route::post('/admin/store-certificate', 'StoreCerti')->middleware('auth')->name('save.certificate');
+    Route::get('/admin/delete-certificate/{id}', 'DeleteCerti')->middleware('auth')->name('delete.certificate');
+    Route::get('/admin/certificate-list', 'CertiList')->middleware('auth')->name('list.certificate');
 });

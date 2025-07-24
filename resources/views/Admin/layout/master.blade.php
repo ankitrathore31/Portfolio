@@ -1,266 +1,298 @@
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="shortcut icon" href="assets/images/logo.png" type="image/x-icon">
-
     <title>Admin</title>
+    <link rel="shortcut icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css" rel="stylesheet">
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Font Awesome 6 (Free version) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <style>
         body {
-
-            background-color: #E6EBEE;
-
+            background-color: #eaedf7;
         }
 
-        .sidebar {
-
-            position: fixed;
-
-            top: 0;
-
-            left: 0;
-
-            width: 250px;
-
-            height: 100vh;
-
-            /* Adjust height as needed */
-
-            background-color: #002b36;
-
-            /* Dark background color */
-
-            padding-top: 20px;
-
-            z-index: 1000;
-
-            overflow-y: auto;
-
-            transition: all 0.3s ease;
-
-            scroll-snap-type: none;
-
+        .navbar {
+            background-color: #fff;
+            border-bottom: 1px solid #e0e0e0;
+            transition: box-shadow 0.3s ease;
+            z-index: 1030;
         }
 
+        .navbar.scrolled {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
 
-
-        .sidebar .nav-link {
-
-            color: white;
-
-            /* Light text color */
-
+        .nav-link {
+            color: #555;
+            font-weight: 500;
             font-size: 14px;
+            transition: color 0.2s;
+        }
 
-            font-weight: 600;
+        .nav-link:hover,
+        .nav-link.active {
+            color: #000;
+        }
 
-            margin-bottom: 15px;
+        .dropdown-menu {
+            animation: dropdownFade 0.3s ease;
+        }
 
-            border-bottom: 1px solid #374151;
+        /* Avatar wrapper for "Me" menu */
+        .me-avatar .avatar-wrapper {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            /* border: 2px solid #ddd; */
+            transition: border-color 0.3s ease;
+        }
 
-            /* Darker border */
+        .me-avatar .avatar-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
 
-            transition: background-color 0.3s ease;
-
+        .me-avatar:hover .avatar-wrapper {
+            border-color: #007bff;
         }
 
 
+        @keyframes dropdownFade {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
 
-        .sidebar .nav-link:hover {
-
-            background-color: #013b48;
-
-            /* Darker background on hover */
-
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-
-
-        .sidebar .dropdown-menu {
-
-            background-color: #002b36;
-
-            /* Dark dropdown background */
-
+        .search-box {
+            border-radius: 999px;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            width: 300px;
+            margin-left: 10px;
         }
 
-
-
-        .sidebar .dropdown-item {
-
-            color: white;
-
-            /* Light text color */
-
-        }
-
-
-
-        .sidebar .dropdown-item:hover {
-
-            background-color: #374151;
-
-            /* Darker background on hover */
-
-        }
-
-
-
-        .main-content {
-
-            margin-left: 250px;
-
-            padding: 20px;
-
-            /* background-color: #E6EBEE; */
-
-            /* Light content background */
-
-        }
-
-
-
-        .open-sidebar-btn {
-
-            display: none;
-
-            position: fixed;
-
-            top: 10px;
-
-            left: 8px;
-
-            background-color: #1f2937;
-
-            /* Dark button background */
-
-            color: #d1d5db;
-
-            /* Light button text color */
-
+        .search-box input {
             border: none;
-
-            padding: 5px 15px;
-
-            font-size: 18px;
-
-            border-radius: 5px;
-
-            z-index: 1100;
-
+            outline: none;
+            width: 100%;
+            margin-left: 8px;
         }
 
+        /* Me avatar */
+        .nav-item.me .nav-link img {
+            border: 2px solid #eee;
+            transition: border-color 0.3s;
+        }
 
+        .nav-item.me .nav-link:hover img {
+            border-color: #007bff;
+        }
 
-        @media (max-width: 991px) {
+        /* Responsive menu toggle */
+        .menu-items {
+            transition: transform 0.3s ease;
+        }
 
-            .sidebar {
+        .i {
+            width: 12px;
+        }
 
-                left: -100%;
-
-                transition: all 0.3s ease;
-
-            }
-
-
-
-            .sidebar.active {
-
+        @media (max-width: 767.98px) {
+            .menu-items {
+                flex-direction: column;
+                position: absolute;
+                top: 56px;
                 left: 0;
-
+                width: 100%;
+                background-color: #fff;
+                border-top: 1px solid #eee;
+                transform: translateY(-200%);
+                z-index: 1020;
             }
 
-
-
-            .main-content {
-
-                margin-left: 0;
-
+            .menu-items.show {
+                transform: translateY(0);
             }
 
-
-
-            .open-sidebar-btn {
-
-                display: block;
-
+            .navbar .navbar-nav {
+                border-left: 3px solid #f1f1f1;
             }
 
+            .search-box {
+                display: none;
+            }
         }
     </style>
 
+    <script>
+        // Add scroll shadow on navbar
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            navbar.classList.toggle('scrolled', window.scrollY > 0);
+        });
+    </script>
 </head>
 
 <body>
 
-    <div class="main-content">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top px-3">
+        <div class="d-flex flex-grow-1 align-items-center">
 
-        <!-- Top Navigation Bar -->
-        <div class="container-fluid text-white py-2 bg-white">
-            <div class="row align-items-center">
-                <div class="col-md-4 text-start">
-                    <h5 class="text-black" style="color: black;">{{ Auth::user()->name }}</h5>
+            <!-- Logo and Toggle -->
+            <a class="navbar-brand d-flex align-items-center me-3 text-decoration-none me-avatar" href="#">
+                <div class="avatar-wrapper">
+                    <img src="{{ asset('images/logo.png') }}" alt="Akki">
                 </div>
-                <div class="col-md-8 text-end d-flex justify-content-end align-items-center">
-                    <div class="dropdown me-3">
-                        <button class="btn btn-light position-relative" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <!-- Font Awesome bell icon -->
-                            <i class="fas fa-bell"></i>
-                            <!-- Optional badge -->
-                            <span
-                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                3
-                                <span class="visually-hidden">unread notifications</span>
-                            </span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#">New message from Admin</a></li>
-                            <li><a class="dropdown-item" href="#">Project deadline approaching</a></li>
-                            <li><a class="dropdown-item" href="#">System update at 3 PM</a></li>
-                        </ul>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-user"></i>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="{{route('profile')}}"><i class="fas fa-user"></i> Profile</a></li>
-                            <li><a class="dropdown-item" href="{{route('change.pass.show')}}"><i class="fas fa-key"></i> Change
-                                    Password</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button class="m-2 btn btn-sm btn-danger"><i class="fas fa-sign-out-alt"></i> Logout </button>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+                <small class="ms-2 d-none d-md-inline"><strong>{{ Auth()->user()->name }}</strong></small>
+            </a>
+
+            <!-- Toggle Button (mobile only) -->
+            <button class="navbar-toggler d-md-none ms-auto" type="button" id="menuToggle">
+                <i class="bi bi-list fs-2"></i>
+            </button>
+
+            <!-- Search Bar (hidden on small screens) -->
+            <form class="search-box me-auto d-none d-md-flex">
+                <input type="text" class="form-control" placeholder="Search">
+            </form>
         </div>
+
+        <!-- Nav Menu -->
+        <ul class="navbar-nav d-md-flex flex-row align-items-center menu-items px-2 border-start" id="mainMenu">
+            <!-- Dashboard -->
+            <li class="nav-item mx-2">
+                <a class="nav-link active text-center" href="{{ route('admin') }}">
+                    <i class="bi bi-speedometer2 fs-5"></i><br><span>Dashboard</span>
+                </a>
+            </li>
+
+            <!-- Project -->
+            <li class="nav-item dropdown mx-2">
+                <a class="nav-link dropdown-toggle text-center" href="#" id="projectDropdown"
+                    data-bs-toggle="dropdown">
+                    <i class="bi bi-kanban fs-5"></i><br><span>Project</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="{{ route('add.project') }}">
+                            <i class="bi bi-plus-circle me-2"></i>Add Project
+                        </a></li>
+                    <li><a class="dropdown-item" href="{{ route('project.list') }}">
+                            <i class="bi bi-list-check me-2"></i>Project List
+                        </a></li>
+                </ul>
+            </li>
+
+            <!-- Certificate -->
+            <li class="nav-item dropdown mx-2">
+                <a class="nav-link dropdown-toggle text-center" href="#" id="certificateDropdown"
+                    data-bs-toggle="dropdown">
+                    <i class="bi bi-award fs-5"></i><br><span>Certificate</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="{{ route('add.certificate') }}">
+                            <i class="bi bi-plus-circle me-2"></i>Add Certificate
+                        </a></li>
+                    <li><a class="dropdown-item" href="{{ route('list.certificate') }}">
+                            <i class="bi bi-collection me-2"></i>Certificate List
+                        </a></li>
+                </ul>
+            </li>
+
+            <!-- Settings -->
+            <li class="nav-item dropdown mx-2">
+                <a class="nav-link dropdown-toggle text-center" href="#" id="settingsDropdown"
+                    data-bs-toggle="dropdown">
+                    <i class="bi bi-gear fs-5"></i><br><span>Setting</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="{{ route('site.setting') }}">
+                            <i class="bi bi-sliders me-2"></i>Site Setting
+                        </a></li>
+                </ul>
+            </li>
+
+            <li class="nav-item dropdown mx-2">
+                <button class="btn btn-light position-relative" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <!-- Font Awesome bell icon -->
+                    <i class="bi bi-bell"></i>
+                    <!-- Optional badge -->
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        3
+                        <span class="visually-hidden">unread notifications</span>
+                    </span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#">New message from Admin</a></li>
+                    <li><a class="dropdown-item" href="#">Project deadline approaching</a></li>
+                    <li><a class="dropdown-item" href="#">System update at 3 PM</a></li>
+                </ul>
+            </li>
+            <!-- Me -->
+            <li class="nav-item dropdown mx-2 me">
+                <a class="nav-link dropdown-toggle text-center me-avatar" href="#" id="meDropdown"
+                    data-bs-toggle="dropdown">
+                    <div class="avatar-wrapper mx-auto">
+                        <img src="{{ asset('images/image.jpg') }}" alt="Me">
+                    </div>
+                    <span>Me</span>
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="{{ route('profile') }}"><i
+                                class="bi bi-person me-2"></i>Profile</a>
+                    </li>
+                    <li><a class="dropdown-item" href="{{ route('change.pass.show') }}"><i
+                                class="bi bi-key me-2"></i>Change Password</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button class="dropdown-item text-danger"><i
+                                    class="bi bi-box-arrow-right me-2"></i>Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div style="margin-top: 80px;">
+        @yield('content')
     </div>
 
-    {{-- Sidebar --}}
-    @include('Admin.sidebar.sidebar')
+    <script>
+        const toggleBtn = document.getElementById('menuToggle');
+        const menuItems = document.getElementById('mainMenu');
 
-    {{-- Main Content --}}
-    @yield('content')
+        toggleBtn.addEventListener('click', () => {
+            menuItems.classList.toggle('show');
+        });
+    </script>
+
 
 </body>
 
