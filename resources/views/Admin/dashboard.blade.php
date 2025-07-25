@@ -2,7 +2,7 @@
 @section('content')
     <style>
         .dashboard-card {
-            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+            background: linear-gradient(to right, #a7b8ca, #1681ec);
             height: 100%;
             border-radius: 0.5rem;
             transition: transform 0.2s ease;
@@ -62,7 +62,7 @@
                     <div class="col-md-3">
                         <div class="card dashboard-card shadow-sm p-3">
                             <div class="card-body">
-                                <h6 class="text-info mb-3"><strong>Website Visitor</strong></h6>
+                                <h6 class="text-info mb-3"><strong>Website Traffic</strong></h6>
                                 <ul class="list-unstyled mb-0">
                                     <li>
                                         <span class="dashboard-label">Total Visitor: </span><span
