@@ -46,8 +46,6 @@
                             touch!
                         </p>
                         <a href="{{ route('contact') }}" class="btn hire-me">Contact Me</a>
-                        {{-- <a href="#" download="#" target="_blank"
-                                class="btn hire-me">Download CV</a> --}}
                     </div>
                     <div class="home-img padd-15">
                         <img src="{{ asset('images/image.jpg') }}" alt="">
@@ -57,17 +55,12 @@
         </section>
         <div class="about section " id="about">
             <div class="container">
-                {{-- <div class="row">
-                    <div class="section-title">
-                        <h2>About Me</h2>
-                    </div>
-                </div> --}}
                 <div class="row">
                     <div class="about-content padd-15">
                         <div class="row">
                             <div class="about-text">
                                 <div class="about-text">
-                                    <h3><span>Website & Software Developer</span></h3>
+                                    <h3><span  style="color: rgb(107, 153, 153);">Website & Software Developer</span></h3>
                                     <p>A results-driven developer focused on delivering high-quality websites and software
                                         solutions tailored to client needs. I specialize in creating scalable web platforms,
                                         custom software, and seamless digital tools that enhance business operations. From
@@ -97,11 +90,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="padd-15 about-text">
-                            <p>Want to build your own website or custom software? Let’s bring your idea to life —
-                                get in touch!</p>
-                            <p><a href="{{ route('contact') }}" class="btn hire-me">Contact Me</a></p>
-                        </div> --}}
                     </div>
                 </div>
             </div>

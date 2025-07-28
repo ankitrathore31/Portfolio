@@ -1,5 +1,58 @@
 @extends('Admin.layout.master')
 @Section('content')
+    <style>
+        /* Container styling */
+        .project-container {
+            background: #f9fbfd;
+            padding: 25px;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            color: #2d3436;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Titles & Subtitles */
+        .project-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .project-sub-title {
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .project-info {
+            font-size: 0.95rem;
+            margin-top: 8px;
+        }
+
+        /* Section Titles (Mission, Conclusion) */
+        .section-title {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            border-left: 4px solid blueviolet;
+            padding-left: 10px;
+            color: #2c3e50;
+        }
+
+        /* Section Content */
+        .section-text {
+            font-size: 1rem;
+            background: #ffffff;
+            padding: 12px;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 15px;
+        }
+
+        /* Normal screen styles remain as you already defined */
+    </style>
     <div class="main-content">
         <div class="d-flex justify-content-between align-items-center mb-3 m-2">
             <h5 class="mb-0">Project View</h5>
@@ -12,7 +65,7 @@
                 </ol>
             </nav>
         </div>
-        <div class="container my-5">
+        <div class=" project-container mt-2 mb-2">
 
             <div class="card shadow-lg p-4 print-area">
                 <!-- Report Header -->
@@ -34,15 +87,15 @@
                             <div class="col-sm-12 mb-2">
                                 <div class="bg-light p-3 rounded border h-100">
                                     <small class="text-muted">Project Name</small>
-                                    <div class="fw-bold text-dark"><strong>{{ $project->name }}</strong></div>
+                                    <div class="fw-bold text-dark">{{ $project->name }}</div>
                                 </div>
                             </div>
 
                             <div class="col-sm-12 mb-2">
                                 <div class="bg-light p-3 rounded border h-100">
                                     <small class="text-muted">Live Link</small>
-                                    <div class="fw-bold text-dark"><strong><a
-                                                href="{{ $project->live_link }}">{{ $project->live_link }}</a></strong>
+                                    <div class="fw-bold text-dark"><a
+                                            href="{{ $project->live_link }}">{{ $project->live_link }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -50,32 +103,23 @@
                             <div class="col-sm-12 mb-2">
                                 <div class="bg-light p-3 rounded border h-100">
                                     <small class="text-muted">Github Link</small>
-                                    <div class="fw-bold text-dark"><strong><a
-                                                href="{{ $project->live_link }}">{{ $project->name }}</a></strong></div>
+                                    <div class="fw-bold text-dark"><a
+                                            href="{{ $project->github_link }}">{{ $project->github_link }}</a></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <h5 class="section-title">
+                    <span>Project Highlight</span>
+                </h5>
+                <p class="section-text">{{ $project->keyword ?? 'N/A' }}</p>
 
-                <!-- Details Section -->
-                <div class="row g-4">
-
-                    <div class="col-sm-12 mb-2">
-                        <div class="bg-light p-3 rounded border h-100">
-                            <small class="text-muted">Project Highlight</small>
-                            <div class="fw-bold text-dark"><b>{{ $project->keyword }}</b></div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 mb-2">
-                        <div class="bg-light p-3 rounded border h-100">
-                            <small class="text-muted">Project Description</small>
-                            <div class="fw-bold text-dark"><b>{{ $project->description }}</b></div>
-                        </div>
-                    </div>
-                </div>
+                <h5 class="section-title">
+                    <span>Project Description</span>
+                </h5>
+                <p class="section-text">{{ $project->description ?? 'N/A' }}</p>
             </div>
 
             <!-- Action Buttons -->
