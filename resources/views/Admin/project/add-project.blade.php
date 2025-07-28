@@ -26,8 +26,8 @@
 
                             <div class="col-md-12 mb-3 form-group local-from">
                                 <label class="form-label">Project Description <span class="text-danger">*</span></label>
-                                <textarea class="form-control @error('description') is-invalid @enderror"
-                                    name="description" placeholder="Project Description" required></textarea>
+                                <textarea class="form-control @error('description') is-invalid @enderror" name="description"
+                                    placeholder="Project Description" required></textarea>
                             </div>
 
                             <div class="col-md-12 mb-3 form-group local-from">
@@ -40,41 +40,39 @@
                                 <label for="github_link" class="form-label">GitHub Link <span
                                         class="text-danger">*</span></label>
                                 <input type="url" class="form-control @error('github_link') is-invalid @enderror"
-                                    name="github_link" placeholder="https://github.com/username/project" >
+                                    name="github_link" placeholder="https://github.com/username/project">
                             </div>
 
                             <div class="col-md-12 mb-3">
                                 <label for="live_link" class="form-label">Live Server Link <span
                                         class="text-danger">*</span></label>
                                 <input type="url" class="form-control @error('live_link') is-invalid @enderror"
-                                    name="live_link" placeholder="https://yourproject.com" >
+                                    name="live_link" placeholder="https://yourproject.com">
                             </div>
 
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
+                                <!-- Multiple File Input -->
+                                <input type="file" class="form-control @error('project_images') is-invalid @enderror"
+                                    name="images[]" id="project_images" accept="image/*" multiple style="display: none;"
+                                    onchange="previewImages(); validateFiles()">
 
-                                <!-- Custom File Input (hidden default) -->
-                                <input type="file" class="form-control @error('project_image') is-invalid @enderror"
-                                    name="image" id="project_image" accept="image/*" style="display: none;"
-                                    onchange="previewImage(); validateFile()">
-
-                                <!-- Custom Button to Trigger File Input -->
+                                <!-- Trigger Button -->
                                 <button type="button" class="btn btn-primary" id="chooseFileBtn">Choose Project
-                                    Image</button>
+                                    Images</button>
 
-                                <!-- Image Preview -->
-                                <div id="imagePreviewContainer" style="margin-top: 10px;">
-                                    <img id="imagePreview" src="" alt="Image Preview"
-                                        style="max-width: 200px; max-height: 200px; display: none;">
-                                </div>
+                                <!-- Preview Container -->
+                                <div id="imagePreviewContainer"
+                                    style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap;"></div>
 
-                                <!-- Error Message for Validation -->
+                                <!-- Error -->
                                 <div id="fileError" class="text-danger" style="display: none;"></div>
                             </div>
                         </div>
-                        <div class="form-group text-center">
-                            <button type="submit" class="btn btn-sucess">Add Project</button>
+
+                        <div class="form-group text-center mt-3">
+                            <button type="submit" class="btn btn-success">Add Project</button>
                         </div>
 
                     </form>
@@ -82,62 +80,52 @@
             </div>
         </div>
     </div>
-
     <script>
-        // Trigger the hidden file input when the button is clicked
         document.getElementById('chooseFileBtn').addEventListener('click', function() {
-            document.getElementById('project_image').click();
+            document.getElementById('project_images').click();
         });
 
-        // Preview the uploaded image
-        function previewImage() {
-            const file = document.getElementById('project_image').files[0];
-            const imagePreview = document.getElementById('imagePreview');
-            const fileError = document.getElementById('fileError');
+        function previewImages() {
+            const files = document.getElementById('project_images').files;
+            const container = document.getElementById('imagePreviewContainer');
+            container.innerHTML = ''; // Clear old previews
 
-            // Check if a file is selected
-            if (file) {
+            Array.from(files).forEach(file => {
                 const reader = new FileReader();
-
-                // Display the image preview
                 reader.onload = function(e) {
-                    imagePreview.src = e.target.result;
-                    imagePreview.style.display = 'block';
-                };
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.maxWidth = '100px';
+                    img.style.maxHeight = '100px';
+                    img.classList.add('rounded');
+                    container.appendChild(img);
+                }
                 reader.readAsDataURL(file);
-
-                // Reset error message
-                fileError.style.display = 'none';
-            }
+            });
         }
 
-        // Validate file size (<= 2MB) and file type (only images)
-        function validateFile() {
-            const file = document.getElementById('project_image').files[0];
+        function validateFiles() {
+            const files = document.getElementById('project_images').files;
             const fileError = document.getElementById('fileError');
 
-            if (file) {
-                const fileSize = file.size / 1024 / 1024;
-                const fileType = file.type.split('/')[0];
-
-                if (fileSize > 40) {
-                    fileError.textContent = 'File size should be less than or equal to 25MB.';
+            for (let file of files) {
+                if (file.size / 1024 / 1024 > 5) { // 5MB limit
+                    fileError.textContent = 'Each file must be <= 5MB';
                     fileError.style.display = 'block';
-                    document.getElementById('project_image').value = ''; // Reset the file input
-                    document.getElementById('imagePreview').style.display = 'none'; // Hide the preview
+                    document.getElementById('project_images').value = '';
+                    document.getElementById('imagePreviewContainer').innerHTML = '';
                     return false;
                 }
-
-                // File type check (only images)
-                if (fileType !== 'image') {
-                    fileError.textContent = 'Only image files are allowed.';
+                if (!file.type.startsWith('image/')) {
+                    fileError.textContent = 'Only image files allowed.';
                     fileError.style.display = 'block';
-                    document.getElementById('project_image').value = ''; // Reset the file input
-                    document.getElementById('imagePreview').style.display = 'none'; // Hide the preview
+                    document.getElementById('project_images').value = '';
+                    document.getElementById('imagePreviewContainer').innerHTML = '';
                     return false;
                 }
             }
 
+            fileError.style.display = 'none';
             return true;
         }
     </script>

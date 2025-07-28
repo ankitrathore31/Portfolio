@@ -63,12 +63,41 @@
                 </div>
                 <div class="row mt-3 g-4">
                     @foreach ($project as $item)
-                        <div class="col-sm-6 col-lg-4">
+                        <div class="col-sm-6 col-lg-4 rounded">
                             <a href="{{ route('show.project', $item->id) }}" class="text-decoration-none text-dark">
                                 <div class="card project-card border-0 shadow-sm h-100">
-                                    <div class="card-img-container">
-                                        <img src="{{ $item->image }}" class="card-img-top" alt="{{ $item->name }}">
+                                    <div class="mb-4">
+                                        @php
+                                            // Use $item instead of $project
+                                            $images = json_decode($item->images, true);
+                                        @endphp
+                                        @if ($images && count($images) > 0)
+                                            <div id="projectCarousel{{ $item->id }}" class="carousel slide"
+                                                data-bs-ride="carousel" data-bs-interval="2500"
+                                                style="width:100%; height:350px; overflow:hidden;">
+                                                <div class="carousel-inner">
+                                                    @foreach ($images as $key => $image)
+                                                        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                                            <img src="{{ asset($image) }}" class="d-block w-100 rounded"
+                                                                style="object-fit: contain; max-height:350px;"
+                                                                alt="slide images">
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                                <button class="carousel-control-prev" type="button"
+                                                    data-bs-target="#projectCarousel{{ $item->id }}"
+                                                    data-bs-slide="prev">
+                                                    <span class="carousel-control-prev-icon"></span>
+                                                </button>
+                                                <button class="carousel-control-next" type="button"
+                                                    data-bs-target="#projectCarousel{{ $item->id }}"
+                                                    data-bs-slide="next">
+                                                    <span class="carousel-control-next-icon"></span>
+                                                </button>
+                                            </div>
+                                        @endif
                                     </div>
+
                                     <div class="card-body">
                                         <h5 class="card-title mb-2">Project Name: <b>{{ $item->name }}</b></h5>
                                         <p class="card-text mb-2">Highlight: {{ $item->keyword }}</p>
@@ -78,6 +107,7 @@
                             </a>
                         </div>
                     @endforeach
+
                 </div>
             </div>
         </section>
@@ -99,4 +129,6 @@
 
         cards.forEach(card => observer.observe(card));
     </script>
+    <!-- Bootstrap JS (before </body>) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 @endsection

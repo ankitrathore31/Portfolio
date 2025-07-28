@@ -75,11 +75,32 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-4">
-                            <div class="card border-1 rounded shadow-sm mx-auto d-flex align-items-center justify-content-center"
-                                style="width: 100%; height: 350px; background-color: #f8f9fa; overflow: hidden;">
-                                <img src="{{ asset($project->image) }}" alt="Project Image"
-                                    style="max-width: 100%; max-height: 100%; object-fit: contain;" class="rounded">
-                            </div>
+                            @php
+                                $images = json_decode($project->images, true);
+                            @endphp
+
+                            @if ($images && count($images) > 0)
+                                <div id="projectCarousel{{ $project->id }}" class="carousel slide" data-bs-ride="carousel"
+                                    data-bs-interval="2000" style="width:100%; height:350px; overflow:hidden;">
+                                    <div class="carousel-inner">
+                                        @foreach ($images as $key => $image)
+                                            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                                <img src="{{ asset($image) }}" class="d-block w-100 rounded"
+                                                    style="object-fit: contain; max-height:350px;" alt="slide images">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <button class="carousel-control-prev" type="button"
+                                        data-bs-target="#projectCarousel{{ $project->id }}" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon"></span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button"
+                                        data-bs-target="#projectCarousel{{ $project->id }}" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon"></span>
+                                    </button>
+                                </div>
+                            @endif
+
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -152,6 +173,13 @@
                 .no-print {
                     display: none !important;
                 }
+            }
+        </style>
+        <style>
+            .carousel-control-prev-icon,
+            .carousel-control-next-icon {
+                filter: invert(1);
+                /* Turns white to black */
             }
         </style>
     </div>
