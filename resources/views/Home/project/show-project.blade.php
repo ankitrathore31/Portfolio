@@ -1,5 +1,6 @@
 @extends('Home.layout.master')
 @Section('content')
+    <!-- Bootstrap CSS (in <head>) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         /* Container styling */
@@ -58,26 +59,49 @@
         <div class="container">
             <div class="row">
                 <div class="section-title padd-15">
-                    <h3>Project  Deatails</h3>
+                    <h3>Project Deatails</h3>
                 </div>
             </div>
             <div class=" project-container mt-2 mb-2">
-
                 <div class="card shadow-lg p-4 print-area">
                     <!-- Report Header -->
                     <div class="text-center mb-4 border-bottom">
-                        <h4 class=""><span style="color: blueviolet;">-</span> Project Details <span style="color: blueviolet;">-</span></h4>
+                        <h4 class=""><span style="color: blueviolet;">-</span> Project Details <span
+                                style="color: blueviolet;">-</span></h4>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-4">
-                                <div class="card border-1 rounded shadow-sm mx-auto d-flex align-items-center justify-content-center"
-                                    style="width: 100%; height: 350px; overflow: hidden;">
-                                    <img src="{{ asset($project->image) }}" alt="Project Image"
-                                        style="max-width: 100%; max-height: 100%; object-fit: contain;" class="rounded">
-                                </div>
+                                @php
+                                    $images = json_decode($project->images, true);
+                                @endphp
+
+                                @if ($images && count($images) > 0)
+                                    <div id="projectCarousel{{ $project->id }}" class="carousel slide"
+                                        data-bs-ride="carousel" data-bs-interval="2000"
+                                        style="width:100%; height:350px; overflow:hidden;">
+                                        <div class="carousel-inner">
+                                            @foreach ($images as $key => $image)
+                                                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                                    <img src="{{ asset($image) }}" class="d-block w-100 rounded"
+                                                        style="object-fit: contain; max-height:350px;" alt="slide images">
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                        <button class="carousel-control-prev" type="button"
+                                            data-bs-target="#projectCarousel{{ $project->id }}" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon"></span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button"
+                                            data-bs-target="#projectCarousel{{ $project->id }}" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon"></span>
+                                        </button>
+                                    </div>
+                                @endif
+
                             </div>
                         </div>
+
                         <div class="col-sm-6">
                             <div class="row mb-2">
                                 <div class="col-sm-12 mb-2">
@@ -90,8 +114,8 @@
                                 <div class="col-sm-12 mb-2">
                                     <div class=" p-3 rounded border h-100">
                                         <small class="text-muted">Live Link</small>
-                                        <div class=" text-dark"><a
-                                                href="{{ $project->live_link }}" target="_blank">{{ $project->live_link }}</a>
+                                        <div class=" text-dark"><a href="{{ $project->live_link }}"
+                                                target="_blank">{{ $project->live_link }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -99,15 +123,15 @@
                                 <div class="col-sm-12 mb-2">
                                     <div class=" p-3 rounded border h-100">
                                         <small class="text-muted">Github Link</small>
-                                        <div class=" text-dark"><a
-                                                href="{{ $project->github_link }}" target="_blank">{{ $project->github_link }}</a></div>
+                                        <div class=" text-dark"><a href="{{ $project->github_link }}"
+                                                target="_blank">{{ $project->github_link }}</a></div>
                                     </div>
                                 </div>
-                                 <div class="col-sm-12 mb-2">
+                                <div class="col-sm-12 mb-2">
                                     <div class=" p-3 rounded border h-100">
                                         <small class="text-muted">LinkedIn Link</small>
-                                        <div class=" text-dark"><a
-                                                href="{{-- $project->github_link --}}" target="_blank">{{-- $project->github_link --}}</a></div>
+                                        <div class=" text-dark"><a href="{{-- $project->github_link --}}"
+                                                target="_blank">{{-- $project->github_link --}}</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -126,32 +150,15 @@
                 </div>
             </div>
         </div>
-
-        <!-- Print Styles -->
-        <style>
-            @media print {
-                body * {
-                    visibility: hidden;
-                }
-
-                .print-area,
-                .print-area * {
-                    visibility: visible;
-                }
-
-                .print-area {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    padding: 0;
-                    box-shadow: none;
-                }
-
-                .no-print {
-                    display: none !important;
-                }
-            }
-        </style>
     </div>
+    <style>
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            filter: invert(1);
+            /* Turns white to black */
+        }
+    </style>
+
+    <!-- Bootstrap JS (before </body>) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 @endsection

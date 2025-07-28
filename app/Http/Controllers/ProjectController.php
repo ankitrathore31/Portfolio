@@ -20,7 +20,7 @@ class ProjectController extends Controller
             'keyword' => 'required|string',
             'gihub_link' => 'nullable|url',
             'live_link' => 'nullable|url',
-            'image' => 'nullable|image|max:2048',
+            'images.*' => 'nullable|image|max:5120' // Each image max 5MB
         ]);
 
         $project = new Project();
@@ -30,18 +30,23 @@ class ProjectController extends Controller
         $project->github_link = $request->github_link;
         $project->live_link = $request->live_link;
 
+        // Handle multiple images
         $destination = public_path('images');
+        $imagePaths = [];
 
-        if ($request->hasFile('image')) {
-            $imageName = time() . '_image.' . $request->file('image')->getClientOriginalExtension();
-            $request->file('image')->move($destination, $imageName);
-            $project->image = 'images/' . $imageName;
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+                $image->move($destination, $imageName);
+                $imagePaths[] = 'images/' . $imageName;
+            }
         }
 
-
+        // Store JSON array in DB
+        $project->images = json_encode($imagePaths);
         $project->save();
 
-        return redirect()->route('project.list')->with('success', 'Project added successfully');
+        return redirect()->route('project.list')->with('success', 'Project added successfully with multiple images');
     }
 
     public function EditProject($id)
@@ -72,7 +77,7 @@ class ProjectController extends Controller
         $destination = public_path('images');
 
         if ($request->hasFile('image')) {
-            
+
             if ($project->image && file_exists(public_path($project->image))) {
                 unlink(public_path($project->image));
             }
