@@ -2,14 +2,18 @@
 @section('content')
     <style>
         .dashboard-card {
-            background: linear-gradient(to right, #a7b8ca, #1681ec);
-            height: 100%;
+            background: linear-gradient(to right, #dbe5eb, #1681ec);
+            /* Adjust gradient colors */
             border-radius: 0.5rem;
+            height: 100%;
             transition: transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Add subtle shadow */
         }
 
         .dashboard-card:hover {
-            transform: translateY(-2px);
+            transform: translateY(-5px);
+            /* Adjust hover effect */
         }
 
         .dashboard-card .card-body {
@@ -20,24 +24,31 @@
         }
 
         .dashboard-avatar img {
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             object-fit: cover;
+            border: 2px solid #fff;
+            /* Optional: add a border around avatar */
         }
 
         .dashboard-label {
             font-weight: 600;
             font-size: 0.95rem;
             color: #343a40;
+            /* Darker label color */
+            margin-bottom: 0.5rem;
+            /* Adjust spacing */
         }
 
         .dashboard-value {
             font-size: 1.1rem;
             font-weight: 500;
             color: #0d6efd;
+            /* Accent color for values */
         }
     </style>
+
     <div class="main-content">
         <div class="wrapper">
             <div class="container my-4">
@@ -62,7 +73,7 @@
                     <div class="col-md-3">
                         <div class="card dashboard-card shadow-sm p-3">
                             <div class="card-body">
-                                <h6 class="text-info mb-3"><strong>Website Traffic</strong></h6>
+                                <h6 class=" mb-3"><strong>Website Traffic</strong></h6>
                                 <ul class="list-unstyled mb-0">
                                     <li>
                                         <span class="dashboard-label">Total Visitor: </span><span
@@ -81,7 +92,7 @@
                     <div class="col-md-3">
                         <div class="card dashboard-card shadow-sm p-3 ">
                             <div class="card-body">
-                                <h6 class="text-primary mb-3"><strong>Projects</strong></h6>
+                                <h6 class=" mb-3"><strong>Projects</strong></h6>
                                 <ul class="list-unstyled mb-0">
                                     <li><span class="dashboard-label">Total Projects:</span> <span
                                             class="dashboard-value">&nbsp; {{ total_project() }}</span></li>
@@ -98,7 +109,7 @@
                     <div class="col-md-3">
                         <div class="card dashboard-card shadow-sm p-3">
                             <div class="card-body">
-                                <h6 class="text-success mb-3"><strong>Certificates</strong></h6>
+                                <h6 class=" mb-3"><strong>Certificates</strong></h6>
                                 <ul class="list-unstyled mb-0">
                                     <li>
                                         <span class="dashboard-label">Total: </span><span class="dashboard-value">&nbsp;
@@ -163,32 +174,32 @@
                             <canvas id="lineChart" style="background-color: #fff"></canvas>
                         </div>
                         <div class="col-md-6 mb-4">
-                        <div class="card-body table-responsive printable">
-                            <table class="table table-bordered table-hover align-middle text-center">
-                                <thead class="table-primary">
-                                    <tr>
-                                        <th>Sr. No.</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (limit_email_list() as $item)
+                            <div class="card-body table-responsive printable">
+                                <table class="table table-bordered table-hover align-middle text-center">
+                                    <thead class="table-primary">
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->name }}</td>
-                                            <td>{{ $item->email }}</td>
-                                            <td><a href="{{ route('view.email', $item->id) }}"
-                                                    class="btn btn-sm me-2 btn-success" title="View">
-                                                    <i class="fa-regular fa-eye"></i>
-                                                </a></td>
+                                            <th>Sr. No.</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Action</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (limit_email_list() as $item)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $item->name }}</td>
+                                                <td>{{ $item->email }}</td>
+                                                <td><a href="{{ route('view.email', $item->id) }}"
+                                                        class="btn btn-sm me-2 btn-success" title="View">
+                                                        <i class="fa-regular fa-eye"></i>
+                                                    </a></td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>

@@ -29,7 +29,7 @@
                             <div class="personal-info padd-15">
                                 <div class="row">
                                     <div class="info-item padd-15">
-                                        <p>Birthday : <span>31 October 2005</span></p>
+                                        <p>Birthday : <span>* * *</span></p>
                                     </div>
                                     <div class="info-item padd-15">
                                         <p>Profession : <span>Web development</span></p>

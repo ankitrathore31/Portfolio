@@ -7,6 +7,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SettingController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Artisan;
@@ -90,6 +91,8 @@ Route::controller(AuthController::class)->group(function(){
 Route::controller(AdminController::class)->group(function(){
     Route::get('/admin', 'admin')->middleware('auth')->name('admin');
 });
+
+Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 Route::controller(ProfileController::class)->group(function(){
     Route::get('admin/profile', 'Profile')->middleware('auth')->name('profile');

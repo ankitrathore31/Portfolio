@@ -171,9 +171,10 @@
                 <i class="bi bi-list fs-2"></i>
             </button>
 
-            <!-- Search Bar (hidden on small screens) -->
-            <form class="search-box me-auto d-none d-md-flex">
-                <input type="text" class="form-control" placeholder="Search">
+            <!-- Search Bar -->
+            <form class="search-box me-auto d-none d-md-flex" id="search-form">
+                <input type="text" class="form-control" id="search" placeholder="Search...">
+                <div id="search-list" class="list-group position-absolute w-50" style="z-index:1000;"></div>
             </form>
         </div>
 
@@ -251,7 +252,8 @@
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
                     @foreach (limit_email_list() as $item)
-                    <li><a class="dropdown-item" href="{{route('view.email',$item->id)}}">{{$item->name}}</a></li>
+                        <li><a class="dropdown-item"
+                                href="{{ route('view.email', $item->id) }}">{{ $item->name }}</a></li>
                     @endforeach
                 </ul>
             </li>
@@ -299,7 +301,34 @@
             menuItems.classList.toggle('show');
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            $('#search').keyup(function() {
+                let query = $(this).val();
+                if (query != '') {
+                    $.ajax({
+                        url: "{{ route('search') }}",
+                        method: "GET",
+                        data: {
+                            query: query
+                        },
+                        success: function(data) {
+                            $('#search-list').fadeIn();
+                            $('#search-list').html(data);
+                        }
+                    });
+                } else {
+                    $('#search-list').fadeOut();
+                }
+            });
 
+            // Hide dropdown on click
+            $(document).on('click', '.search-item', function() {
+                $('#search').val($(this).text());
+                $('#search-list').fadeOut();
+            });
+        });
+    </script>
 
 </body>
 
