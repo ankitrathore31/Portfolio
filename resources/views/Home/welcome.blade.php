@@ -80,12 +80,12 @@
                                                     href="https://akkirathore.com/">https://akkirathore.com/</a></span></p>
                                     </div>
                                     <div class="info-item padd-15">
+                                        <p>City : <span>Bareilly</span></p>
+                                    </div>
+                                    <div class="info-item padd-15">
                                         <p>Email : <span><a href="mailto:akkirathore3110@gmail.com" target="_blank"
                                                     rel="noopener noreferrer">akkirathore3110@gmail.com</a></span>
                                         </p>
-                                    </div>
-                                    <div class="info-item padd-15">
-                                        <p>City : <span>Bareilly</span></p>
                                     </div>
                                 </div>
                             </div>

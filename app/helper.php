@@ -44,6 +44,13 @@ if(!function_exists('limit_project_list')){
     }
 }
 
+if(!function_exists('limit_project')){
+    function limit_project(){
+        $limit_project = Project::orderBy('created_at', 'desc')->limit(2)->get();
+        return $limit_project;
+    }
+}
+
 if(!function_exists('getMonthProjectCount')){
     function getMonthProjectCount(){
     $months = collect(range(1, 12))->map(function($month){
@@ -112,5 +119,23 @@ if(!function_exists('getMonthEmailCount')){
         return $projectCount->get((int)$month, 0);
     })->toArray();
 
+    }
+}
+
+if (!function_exists('monthly_visitors')) {
+    function monthly_visitors() {
+        $visitors = Visitor::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
+            ->groupBy('month')
+            ->orderBy('month')
+            ->pluck('total', 'month')
+            ->toArray();
+
+        // Fill missing months with 0
+        $monthlyData = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $monthlyData[] = $visitors[$i] ?? 0;
+        }
+
+        return $monthlyData;
     }
 }

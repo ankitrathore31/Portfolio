@@ -45,7 +45,7 @@
 
         /* Section Content */
         .section-text {
-            font-size: 1rem;
+            font-size: 14px;
             background: #ffffff;
             padding: 12px;
             border-radius: 6px;
@@ -57,11 +57,11 @@
     </style>
     <div class="main-content">
         <div class="container">
-            <div class="row">
+            {{-- <div class="row">
                 <div class="section-title padd-15">
                     <h3>Project Deatails</h3>
                 </div>
-            </div>
+            </div> --}}
             <div class=" project-container mt-2 mb-2">
                 <div class="card shadow-lg p-4 print-area">
                     <!-- Report Header -->
@@ -146,7 +146,16 @@
                     <h5 class="section-title">
                         <span>Project Description</span>
                     </h5>
-                    <p class="section-text">{{ $project->description ?? 'N/A' }}</p>
+                    <div
+                        style="padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            white-space: pre-wrap;
+            color: #202124;
+            font-size: 15px;
+            line-height: 1.6;">
+                        {{ $project->description ?? 'N/A' }}</div>
                 </div>
             </div>
         </div>

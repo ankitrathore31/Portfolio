@@ -54,7 +54,7 @@
             <div class="container my-4">
                 <div class="row g-4">
                     <!-- User Info Card -->
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="card dashboard-card shadow-sm p-3">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
@@ -69,27 +69,8 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-3">
-                        <div class="card dashboard-card shadow-sm p-3">
-                            <div class="card-body">
-                                <h6 class=" mb-3"><strong>Website Traffic</strong></h6>
-                                <ul class="list-unstyled mb-0">
-                                    <li>
-                                        <span class="dashboard-label">Total Visitor: </span><span
-                                            class="dashboard-value">&nbsp; {{ total_vistior() }}</span>
-                                    </li>
-                                    <li>
-                                        <span class="dashboard-label">Today Visitor: </span><span
-                                            class="dashboard-value">&nbsp; {{ today_visitor() }}</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Total Projects Card -->
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="card dashboard-card shadow-sm p-3 ">
                             <div class="card-body">
                                 <h6 class=" mb-3"><strong>Projects</strong></h6>
@@ -106,7 +87,7 @@
                     </div>
 
                     <!-- Total Certificates Card -->
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="card dashboard-card shadow-sm p-3">
                             <div class="card-body">
                                 <h6 class=" mb-3"><strong>Certificates</strong></h6>
@@ -127,9 +108,52 @@
             </div>
             <div class="container my-4">
                 <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <!-- Chart -->
+                        <div class="card shadow-sm p-3">
+                            <div class="card-body">
+                                <h6 class="mb-3"><strong>Website Traffic Chart</strong></h6>
+                                <canvas id="trafficChart" style="max-height: 300px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <!-- Dashboard Card -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card shadow-sm p-3 mb-3">
+                                    <div class="card-body">
+                                        <h6 class="mb-3"><strong>Website Traffic</strong></h6>
+                                        <ul class="list-unstyled mb-0">
+                                            <li>
+                                                <span class="dashboard-label">Total Visitor: </span><span
+                                                    class="dashboard-value">&nbsp;{{ total_vistior() }}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card shadow-sm p-3 mb-3">
+                                    <div class="card-body">
+                                        <h6 class="mb-3"><strong>Today Traffic</strong></h6>
+                                        <ul class="list-unstyled mb-0">
+                                            <li>
+                                                <span class="dashboard-label">Today Visitor: </span><span
+                                                    class="dashboard-value">&nbsp;{{ today_visitor() }}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container my-4">
+                <div class="row">
                     <!-- Bar Chart -->
                     <div class="col-md-6 mb-4">
-                        <canvas id="barChart" style="background-color: #fff"></canvas>
+                        <canvas id="barChart" style="background-color: #fff" style="max-height: 300px;"></canvas>
                     </div>
 
                     <div class="col-md-6 mb-4">
@@ -138,7 +162,6 @@
                                 <thead class="table-primary">
                                     <tr>
                                         <th>Sr. No.</th>
-                                        {{-- <th>Project Image</th> --}}
                                         <th>Project Name</th>
                                         <th>Github Link</th>
                                         <th>Live Link</th>
@@ -146,13 +169,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (limit_project_list() as $item)
+                                    @foreach (limit_project() as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            {{-- <td>
-                                            <img src="{{ asset($item->image) }}" alt="image"
-                                                class="img-thumbnail" width="80">
-                                        </td> --}}
                                             <td>{{ $item->name }}</td>
                                             <td><a href="{{ $item->github_link }}">{{ $item->github_link }}</a></td>
                                             <td><a href="{{ $item->live_link }}">{{ $item->live_link }}</a></td>
@@ -171,7 +190,7 @@
                     <div class="row">
                         <!-- Line Chart -->
                         <div class="col-md-6 mb-4">
-                            <canvas id="lineChart" style="background-color: #fff"></canvas>
+                            <canvas id="lineChart" style="background-color: #fff" style="max-height: 300px;"></canvas>
                         </div>
                         <div class="col-md-6 mb-4">
                             <div class="card-body table-responsive printable">
@@ -208,7 +227,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-        const projectData = @json(getMonthProjectCount()); // dynamic monthly data
+        const projectData = @json(getMonthProjectCount());
 
         const barCtx = document.getElementById('barChart').getContext('2d');
         new Chart(barCtx, {
@@ -256,5 +275,49 @@
                 }
             }
         });
+    </script>
+    <script>
+        window.onload = function() {
+            const canvas = document.getElementById('trafficChart');
+            if (!canvas || canvas.tagName.toLowerCase() !== 'canvas') {
+                console.error("'trafficChart' is not a canvas element.");
+                return;
+            }
+
+            const visitorData = @json(monthly_visitors());
+
+            const ctx = canvas.getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov',
+                        'Dec'
+                    ],
+                    datasets: [{
+                        label: 'Monthly Visitors',
+                        data: visitorData,
+                        fill: true,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    }
+                }
+            });
+        };
     </script>
 @endsection

@@ -42,7 +42,7 @@
         }
 
         .card-title {
-            font-weight: 600;
+            font-weight: 500;
         }
     </style>
 
@@ -63,7 +63,8 @@
                 </div>
                 <div class="row mt-3 g-4">
                     @foreach ($project as $item)
-                        <div class="col-sm-6 col-lg-4 rounded">
+                        <div class="col-sm-6 col-lg-4 rounded
+                        ">
                             <a href="{{ route('show.project', $item->id) }}" class="text-decoration-none text-dark">
                                 <div class="card project-card border-0 shadow-sm h-100">
                                     <div class="mb-4">
@@ -78,7 +79,7 @@
                                                 <div class="carousel-inner">
                                                     @foreach ($images as $key => $image)
                                                         <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                                            <img src="{{ asset($image) }}" class="d-block w-100 rounded"
+                                                            <img src="{{ asset($image) }}" class="d-block w-100 img-fluid rounded"
                                                                 style="object-fit: contain; max-height:350px;"
                                                                 alt="slide images">
                                                         </div>
@@ -99,9 +100,9 @@
                                     </div>
 
                                     <div class="card-body">
-                                        <h5 class="card-title mb-2">Project Name: <b>{{ $item->name }}</b></h5>
-                                        <p class="card-text mb-2">Highlight: {{ $item->keyword }}</p>
-                                        <a href="{{ route('show.project', $item->id) }}" class="btn btn-info">More Info</a>
+                                        <h5 class="card-title mb-2">{{ $item->name }}</h5>
+                                        <small class="card-text mb-2">Highlight: {{ $item->keyword }}</small>
+                                        <p><a href="{{ route('show.project', $item->id) }}" class="btn btn-info mt-1">More Info</a></p>
                                     </div>
                                 </div>
                             </a>
