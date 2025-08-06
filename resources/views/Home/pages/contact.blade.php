@@ -37,7 +37,7 @@
                     <div class="contact-info-item padd-15">
                         <div class="icon"><i class="fa fa-envelope"></i></div>
                         <h4>Email</h4>
-                        <a href="Mailto:ankitrathore3110@gmail.com">ankitrathore3110@gmail.com</a>
+                        <a href="Mailto:akkirathore3110@gmail.com">akkirathore3110@gmail.com</a>
                     </div>
                     <!-- contact info item end  -->
                     <!-- contact info item start  -->
@@ -95,8 +95,9 @@
         </section>
     </div>
     {{-- </div> --}}
-    <script>
-        // JavaScript code to show a popup
-        alert("{{ Session::get('success') }}");
-    </script>
+    @if (Session::has('success'))
+        <script>
+            alert("{{ Session::pull('success') }}");
+        </script>
+    @endif
 @endsection
